@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--这里开头要改为线性布局-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.linearlayout.MainActivity">
+
+
+
+
+<!--
+第一行-存放TextView
+第二行第二列拉伸
+第三行全部拉伸
+第三行第二列拉伸
+第四行第二列拉伸
+-->
+
+
+
+
+    <!--第0行 用于存放TextView-->
+    <LinearLayout android:id="@+id/LLayout01"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LinearLayout-TableLayout" />
+
+    </LinearLayout>
+
+    <!--第1行  第二列拉伸-->
+    <LinearLayout android:id="@+id/TableLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+            <Button android:id="@+id/but01-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,1"
+                />
+            <Button android:id="@+id/but01-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,2"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/but01-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,3"
+                />
+            <Button android:id="@+id/but01-4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1,4"
+                />
+
+
+    </LinearLayout>
+
+    <!--第2行-->
+    <LinearLayout android:id="@+id/TableLayout03"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+            <Button android:id="@+id/but02-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,1"
+                />
+            <Button android:id="@+id/but02-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,2"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/but02-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,3"
+                />
+            <Button android:id="@+id/but02-4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2,4"
+                />
+
+    </LinearLayout>
+
+    <!--第3行-->
+    <LinearLayout android:id="@+id/TableLayout04"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+            <Button android:id="@+id/but03-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3,1"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/but03-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3,2"
+                android:layout_weight="0"/>
+            <Button android:id="@+id/but03-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3,3"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/but03-4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3,4"
+                android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <!--第4行-->
+    <LinearLayout android:id="@+id/TableLayout05"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+            <Button android:id="@+id/but04-1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4,1"
+                />
+            <Button android:id="@+id/but04-2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4,2"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/but04-3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4,3"
+                />
+            <Button android:id="@+id/but04-4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4,4"
+                />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

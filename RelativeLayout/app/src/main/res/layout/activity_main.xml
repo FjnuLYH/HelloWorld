@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.administrator.relativelayout.MainActivity">
+
+    <!--位于中间-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Blue"
+        android:text="Blue"
+        android:background="#0000FF"
+        android:layout_centerInParent="true"
+
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"/>
+
+    <!--位于BlUe下方 左边界对齐-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Violet"
+        android:text="Violet"
+        android:background="#EE82EE"
+        android:layout_below="@id/Blue"
+
+
+        />
+
+    <!--位于Blue左侧 上边界对齐-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Green"
+        android:text="Green"
+        android:background="#008000"
+        android:layout_toLeftOf="@id/Blue"
+        android:layout_alignTop="@id/Blue"/>
+
+    <!--位于Blue右侧 上边界对齐-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Indigo"
+        android:text="Indigo"
+        android:background="#4B0082"
+        android:layout_toRightOf="@id/Blue"
+        android:layout_alignTop="@id/Blue"/>
+
+    <!--位于Blue上方 左边界对齐-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Orange"
+        android:text="Orange"
+        android:background="#FFA500"
+        android:layout_above="@id/Blue"
+        android:layout_alignLeft="@id/Blue"
+
+        />
+
+
+    <!--位于Orange左侧 上边界对齐-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Red"
+        android:text="Red"
+        android:background="#FF0000"
+        android:layout_toLeftOf="@id/Orange"
+        android:layout_alignTop="@id/Orange"
+        android:layout_alignParentLeft="true"
+
+        android:layout_marginRight="50dp"/>
+
+
+    <!--位于Orange右侧 上边界对齐-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Yellow"
+        android:text="Yellow"
+        android:background="#FFFF00"
+        android:layout_toRightOf="@id/Orange"
+        android:layout_alignTop="@id/Orange"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="30dp"/>
+
+</RelativeLayout>

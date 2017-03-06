@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.tablelayout.MainActivity"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
+
+    <TableRow android:id="@+id/Tab1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/tex1_1"
+            android:text="Open..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+
+        <LinearLayout android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView android:id="@+id/text1_2"
+            android:text="Ctrl-O"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"/>
+</LinearLayout>
+
+    </TableRow>
+
+    <TableRow android:id="@+id/Tab2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView android:id="@+id/tex2_1"
+            android:text="Save..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+
+        <LinearLayout android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/tex2_2"
+                android:text="Ctrl_S"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"/>
+</LinearLayout>
+
+    </TableRow>
+
+
+    <TableRow android:id="@+id/Tab3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView android:id="@+id/tex3_1"
+            android:text="Save As..."
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView android:id="@+id/tex3_2"
+        android:text="Ctrl+shift-S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+
+    </TableRow>
+<!--这里设置用TextView分隔线
+关于TextView设置宽度问题   http://blog.csdn.net/chunqiuwei/article/details/44810731-->
+    <TableRow android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#000000"
+            >
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </ImageView>
+        </RelativeLayout>
+
+    </TableRow>
+
+    <TableRow android:id="@+id/Tab4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/tex4"
+            android:text="Import"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+    </TableRow>
+
+    <TableRow android:id="@+id/Tab5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/tex6_1"
+            android:text="Export"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+
+        <LinearLayout android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView android:id="@+id/tex6_2"
+            android:text="Ctrl-E"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+        </LinearLayout>
+
+    </TableRow>
+
+
+
+    <!--这里设置用TextView分隔线
+    关于TextView设置宽度问题   http://blog.csdn.net/chunqiuwei/article/details/44810731-->
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:background="#000000"
+    >
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ImageView>
+</RelativeLayout>
+
+
+
+
+    <TableRow android:id="@+id/Tab6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/tex7"
+            android:text="Quit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+</LinearLayout>
