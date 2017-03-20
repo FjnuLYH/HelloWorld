@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">lion</string>
+    <string name= "InputuserName">请填写登录账号</string>
+</resources>

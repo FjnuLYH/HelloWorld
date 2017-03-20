@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.lion.MainActivity">
+
+    <!--这里加个图片作为头-->
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/dialog_imageView_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#ffd060" />
+    </TableRow>
+
+
+    <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--用户名输入框头部-->
+        <TextView android:id="@+id/userNameHeader"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="用户名"
+            android:textSize="10dp"/>
+        <!--用户名输入框-->
+        <EditText android:id="@+id/InputuserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/InputuserName"
+            android:selectAllOnFocus="true"/>
+
+    </TableRow>
+
+    <TableRow android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--密码输入框头部-->
+        <TextView android:id="@+id/PasswHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="10pt"/>
+        <!--密码输入框-->
+        <EditText android:id="@+id/Passw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:password="true"/>
+
+    </TableRow>
+
+    <!--以上为登录用户名+登录密码!-->
+
+
+
+
+</TableLayout>
