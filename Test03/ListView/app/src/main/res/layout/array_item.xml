@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxHeight="20dp"
-        android:maxWidth="20dp"
-        android:src="@mipmap/ic_launcher"/>
+    <!--定义一个imageview作为列表一部分:开头-->
+    <ImageView android:id="@+id/Image"
 
+        android:layout_alignParentRight="true"
 
-    <TextView android:id="@+id/textview"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"/>
+
+    <LinearLayout
+        android:layout_alignParentRight="true"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:textSize="24dp"
-        android:padding="10px"
-        android:shadowColor="#f0f"
-        android:shadowDy="4"
-        android:shadowDx="4"
-        android:shadowRadius="2"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <include android:layout="@layout/activity_main" />
-    <include android:layout="@layout/array_item" />
+        <!--列表部分1：-->
+        <TextView android:id="@+id/TieleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="#f00"
+            android:paddingLeft="10dp"
+            android:gravity="left|center_vertical"/>
 
-</LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

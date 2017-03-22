@@ -23,9 +23,10 @@
         <TextView android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="#f0f"
-            android:paddingLeft="10dp"/>
+            android:textSize="25dp"
+            android:textColor="#f00"
+            android:paddingLeft="10dp"
+            android:gravity="left|center_vertical"/>
 
         <!--列表部分1：
         <TextView android:id="@+id/desc"
