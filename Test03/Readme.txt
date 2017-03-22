@@ -1,6 +1,0 @@
-这是第三个Android项目：UI组件
-
-lion对应自定义AlertDialog 
-ListView 对应创建上下文操作模式(ActionMode)的上下文菜单
-XMLMean2 使用XML定义菜单
-SimpleAdapter 利用SimpleAdapter实现复杂布局
