@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--指定启动PreferenceFragment的列表项-->
+    <header android:fragment="com.example.administrator.launcheractivity.PreferenceActivityTest$Prefs1Fragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="程序选项设置"
+        android:summary="设置应用的相关选项"/>
+
+    <header android:fragment="com.example.administrator.launcheractivity.PreferenceActivityTest$Prefs2Fragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="界面选项设置"
+        android:summary="设置显示界面的相关选项">
+
+        <!--使用extra可向Activity传入额外的数据-->
+        <extra
+            android:name="website"
+            android:value="www.baidu.com"/>
+    </header>
+    <!--使用Intent启动指定Activity列表项-->
+    <header
+        android:icon="@mipmap/ic_launcher"
+        android:title="使用Intent"
+        android:summary="使用Intent启动一个Activity">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://baidu.com"/>
+    </header>
+</preference-headers>
+
+
+<!--一共3个列表项
+前两个使用android:fragment指定启动PreferenceFregment
+第三个通过<intent/>启动Activity
+
+Prefs1Fragment Prefs2Fragment 将在 PreferenceActivityTest中实现的两个类
+-->

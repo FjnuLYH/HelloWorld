@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--定义一个imageview作为列表一部分:开头-->
+    <ImageView android:id="@+id/Image"
+
+        android:layout_alignParentRight="true"
+
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:focusable="false"/>
+
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:focusable="false">
+
+        <!--列表部分1：-->
+        <TextView android:id="@+id/TieleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="#f00"
+            android:paddingLeft="10dp"
+            android:gravity="left|center_vertical"
+            android:focusable="false"/>
+
+        <CheckBox android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:checked="false"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
