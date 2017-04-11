@@ -16,15 +16,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ScreenPreference_newscreen"
-            android:label="Screen Preference to screen"></activity>
-        <activity android:name=".ScreenPreference_newintent"
-            android:label="Screen Preference to Web"></activity>
-        <activity android:name=".CheckBoxPreference"
-            android:label="CheckBox"></activity>
-
-
-
 
     </application>
 

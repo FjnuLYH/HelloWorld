@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="In-line preferences">
+        <CheckBoxPreference
+            android:key="CheckPF_1"
+            android:title="CheckBox Preference"
+            android:summary="This is a CheckBox"
+            ></CheckBoxPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Dialog-based preferences:">
+    <EditTextPreference
+        android:key="EditPF"
+        android:title="EditText Preference"
+        android:summary="An exmaple that use a EditText Dialog"></EditTextPreference>
+        <ListPreference
+            android:key="ListPF"
+            android:title="ListPreference"
+            android:summary="An exmaple that use a ListPreference Dialog"
+
+            android:entries="@array/Option"
+            android:entryValues="@array/Option_value"
+            ></ListPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Launch preferences">
+        <PreferenceScreen
+
+            android:key="PFS_New_PFS"
+            android:title="PreferenceScreen:new PreferenceScreen"
+            android:summary="show another new screen of preference">
+
+                <CheckBoxPreference
+                    android:key="New_SPF_Checkbox"
+                    android:title="Toggle preference"
+                    android:summary="XXXXXXXXXXXX................."
+                    android:visibility="visible">
+                </CheckBoxPreference>
+
+
+        </PreferenceScreen>
+
+
+        <PreferenceScreen
+            android:key="PFS_New_Web"
+            android:title="PreferenceScreen: new Web"
+            android:summary="show another new Web">
+                <!--用extra传入额外的数据：只是一个变量website的值 = www.baidu.con -->
+                <extra
+                    android:name="website"
+                    android:value="www.baidu.con"/>
+                <intent android:action="android.intent.action.VIEW"
+                        android:data="http://baidu.com"/>
+        </PreferenceScreen>
+        </PreferenceCategory>
+
+    <PreferenceCategory android:title="Preference attributes">
+        <CheckBoxPreference
+            android:key="CheckBox_Parent"
+            android:title="Parent CheckBox preference"
+            android:summary="this is a visually of parent"></CheckBoxPreference>
+        <CheckBoxPreference
+            android:key="CheckBox_Child"
+            android:title="Child CheckBox preference"
+            android:summary="this is a visually of child"
+            android:dependency="CheckBox_Parent"></CheckBoxPreference>
+    </PreferenceCategory>
+
+    </PreferenceScreen>

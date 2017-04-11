@@ -23,6 +23,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    public void singleChoise(View source)
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder( this)//设置对话框图标
+                .setView(loginForm)//填充布局
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {//设置登录按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //创建一个·Toast信息
+                        Toast toast = Toast.makeText(MainActivity.this,"Yes",
+                                //设置显示的时间
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                })//第一个按钮;登录 设置完成
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {//设置取消按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //创建一个·Toast信息
+                        Toast toast = Toast.makeText(MainActivity.this,"CANCEL",
+                                //设置显示的时间
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+
     public void customView(        ){
         //加载login界面布局文件!
         TableLayout loginForm = (TableLayout)getLayoutInflater().inflate(R.layout.login,null);
