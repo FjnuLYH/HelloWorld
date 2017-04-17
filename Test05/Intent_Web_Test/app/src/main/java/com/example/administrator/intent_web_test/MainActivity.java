@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 //创建Intent对象
                 Intent intent = new Intent();
                 //设置一个Action属性
-                intent.setAction(MainActivity.Browser_ACTION);
-                intent.addCategory(MainActivity.Browser_CATAGORY);
+                intent.setAction(MainActivity.CRAZYIT_ACTION);
+                intent.addCategory(MainActivity.CRAZYIT_CATAGORY);
 
                 EditText edittext =(EditText)findViewById(R.id.Edit_URL);
                 String url = edittext.getText().toString();

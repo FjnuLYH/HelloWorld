@@ -32,8 +32,8 @@
         <activity android:name=".NewWebActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="org.crazyit.intent.action.BROWSER_ACTION"/>
-                <category android:name="org.crazyit.intent.category.BROWSER_CATAGORY"/>
+                <action android:name="org.crazyit.intent.action.CRAZYIT_ACTION"/>
+                <category android:name="org.crazyit.intent.category.CRAZYIT_CATAGORY"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
