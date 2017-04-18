@@ -10,10 +10,14 @@ SeconActivity Ò²ÊÇÒşÊ½µÄµ÷ÓÃIntent£¬ÓÃBundle»ñÈ¡MainActivityÖĞÊäÈëµÄURLÔÚ¶¨Î»ÍøÒ
 
 
 
+PS£ºÈç¹û³öÏÖnet::ERR_CACHE_MISS£¬Çë¼ì²éÒ»ÏÂÊÇ·ñÓĞÈ·±£ÍøÂçÈ¨ÏŞ£¡ <uses-permission android:name="android.permission.INTERNET" /> 
+
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Test05/pict/Intent_Test1.PNG)
 
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Test05/pict/Intent_Test03.PNG)
 
 
-![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Test05/pict/Intent_Test02.PNG)
+
+![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Test05/pict/Screenshot_20170418-173316.PNG)
 
