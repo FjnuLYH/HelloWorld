@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\Android project\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\title_editor.xml",
+        "source": "D:\\Android project\\NotePad-master\\app\\src\\main\\res\\layout\\title_editor.xml"
+    },
+    {
+        "merged": "D:\\Android project\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\note_editor.xml",
+        "source": "D:\\Android project\\NotePad-master\\app\\src\\main\\res\\layout\\note_editor.xml"
+    },
+    {
+        "merged": "D:\\Android project\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\noteslist_item.xml",
+        "source": "D:\\Android project\\NotePad-master\\app\\src\\main\\res\\layout\\noteslist_item.xml"
+    },
+    {
+        "merged": "D:\\Android project\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notes_list.xml",
+        "source": "D:\\Android project\\NotePad-master\\app\\src\\main\\res\\layout\\notes_list.xml"
+    }
+]
