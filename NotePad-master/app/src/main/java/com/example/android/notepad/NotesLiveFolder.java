@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+//便签程序的实时文件夹（桌面快捷方式的建立）
+
 package com.example.android.notepad;
 
 import com.example.android.notepad.NotePad;
@@ -43,7 +45,7 @@ public class NotesLiveFolder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        System.out.println("启动  NotesLiveFolder-onCreate！");
         /*
          * Gets the incoming Intent and its action. If the incoming Intent was
          * ACTION_CREATE_LIVE_FOLDER, then create an outgoing Intent with the

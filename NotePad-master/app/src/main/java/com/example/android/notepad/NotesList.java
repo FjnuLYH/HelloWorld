@@ -149,7 +149,7 @@ public class NotesList extends ListActivity {
             System.out.println("Title："+ cursor.getString(1));
             System.out.println("创建时间："+ cursor.getString(2));
             System.out.println("修改时间："+ cursor.getString(3));
-            System.out.println("STRRR："+ str);
+            System.out.println("Title+修改时间："+ str);
 
 
         }
@@ -358,6 +358,8 @@ public class NotesList extends ListActivity {
            */
           startActivity(new Intent(Intent.ACTION_PASTE, getIntent().getData()));
           return true;
+            case R.id.menu_Search:
+                startActivity( new Intent ( Intent.ACTION_SEARCH,getIntent().getData()));
         default:
             return super.onOptionsItemSelected(item);
         }

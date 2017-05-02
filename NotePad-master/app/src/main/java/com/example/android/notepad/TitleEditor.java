@@ -69,7 +69,7 @@ public class TitleEditor extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        System.out.println("启动  TitleEditor-onCreate！");
         // Set the View for this Activity object's UI.
 
         setContentView(R.layout.title_editor);
@@ -107,12 +107,12 @@ public class TitleEditor extends Activity {
      * Displays the current title for the selected note.
      */
     //当活动恢复时被执行。把光标移动到开头，把首行标题列的文字设置到编辑框中。
-    // 这里注意！！此处即死一开始创建之后默认的标题！！！记得加上date日期
+    // 这里注意！！此处一开始创建之后默认的标题，记得加上date日期
     //如果光标为空就什么也不做
     @Override
     protected void onResume() {
         super.onResume();
-
+        System.out.println("启动  TitleEditor-onResume！");
         // Verifies that the query made in onCreate() actually worked. If it worked, then the
         // Cursor object is not null. If it is *empty*, then mCursor.getCount() == 0.
         if (mCursor != null) {
@@ -121,11 +121,9 @@ public class TitleEditor extends Activity {
             // record retrieved. This moves it to the first record.
             mCursor.moveToFirst();
 
-            //这里获取当前时间
-            Date now =GetTime.Get_Now_Time_date();
-            //显示的默认标题记得加上时间
+            //这里是编辑标题时显示的，还没写入数据库
             // Displays the current title text in the EditText object.
-            mText.setText(mCursor.getString(COLUMN_INDEX_TITLE)  +now);
+            mText.setText(mCursor.getString(COLUMN_INDEX_TITLE)  );
 
         }
     }
@@ -146,17 +144,22 @@ public class TitleEditor extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        System.out.println("启动  TitleEditor-onPause！");
         // Verifies that the query made in onCreate() actually worked. If it worked, then the
         // Cursor object is not null. If it is *empty*, then mCursor.getCount() == 0.
+
 
         if (mCursor != null) {
 
             // Creates a values map for updating the provider.
             ContentValues values = new ContentValues();
-            //这里改变标题？？
+
             // In the values map, sets the title to the current contents of the edit box.
-            values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
+//这里是点击EditTitle时，将编辑后的标志，有本代码加上时间，记录数据库
+
+            values.put(NotePad.Notes.COLUMN_NAME_TITLE,mText.getText().toString());
+
+
 
             /*
              * Updates the provider with the note's new title.
@@ -166,15 +169,16 @@ public class TitleEditor extends Activity {
              * local database, the block will be momentary, but in a real app you should use
              * android.content.AsyncQueryHandler or android.os.AsyncTask.
              */
-            //把新标题更新到数据库中
             getContentResolver().update(
-                mUri,    // The URI for the note to update.
-                values,  // The values map containing the columns to update and the values to use.
-                null,    // No selection criteria is used, so no "where" columns are needed.
-                null     // No "where" columns are used, so no "where" values are needed.
+                    mUri,    // The URI for the note to update.
+                    values,  // The values map containing the columns to update and the values to use.
+                    null,    // No selection criteria is used, so no "where" columns are needed.
+                    null     // No "where" columns are used, so no "where" values are needed.
             );
 
         }
+
+
     }
 
     //点击OK按钮时执行：推出本活动。注意：布局在按钮的属性设定了 android:onClick="onClickOk"

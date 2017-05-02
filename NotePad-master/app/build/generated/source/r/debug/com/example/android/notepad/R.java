@@ -20,11 +20,12 @@ public final class R {
         public static final int live_folder_notes=0x7f020006;
     }
     public static final class id {
-        public static final int DateItem=0x7f060002;
-        public static final int TieleItem=0x7f060001;
+        public static final int SearchOk=0x7f060002;
+        public static final int SearchTitle=0x7f060001;
         public static final int context_copy=0x7f060009;
         public static final int context_delete=0x7f06000a;
         public static final int context_open=0x7f060008;
+        public static final int menu_Search=0x7f06000d;
         public static final int menu_add=0x7f06000b;
         public static final int menu_delete=0x7f060007;
         public static final int menu_paste=0x7f06000c;
@@ -36,8 +37,8 @@ public final class R {
     }
     public static final class layout {
         public static final int note_editor=0x7f030000;
-        public static final int notes_list=0x7f030001;
-        public static final int noteslist_item=0x7f030002;
+        public static final int noteslist_item=0x7f030001;
+        public static final int search_by_title=0x7f030002;
         public static final int title_editor=0x7f030003;
     }
     public static final class menu {
@@ -61,10 +62,11 @@ public final class R {
         public static final int nothing_to_save=0x7f04000c;
         public static final int resolve_edit=0x7f04000d;
         public static final int resolve_title=0x7f04000e;
-        public static final int text_title=0x7f04000f;
-        public static final int title_create=0x7f040010;
-        public static final int title_edit=0x7f040011;
-        public static final int title_edit_title=0x7f040012;
-        public static final int title_notes_list=0x7f040013;
+        public static final int search_by_title=0x7f04000f;
+        public static final int text_title=0x7f040010;
+        public static final int title_create=0x7f040011;
+        public static final int title_edit=0x7f040012;
+        public static final int title_edit_title=0x7f040013;
+        public static final int title_notes_list=0x7f040014;
     }
 }

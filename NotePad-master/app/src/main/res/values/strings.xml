@@ -23,6 +23,9 @@
     <string name="title_edit">Edit: %1$s</string>
     <string name="title_notes_list">Notes</string>
 
+    <string name="search_by_title">Search Note</string>
+
+
     <string name="menu_add">New note</string>
     <string name="menu_save">Save</string>
     <string name="menu_delete">Delete</string>

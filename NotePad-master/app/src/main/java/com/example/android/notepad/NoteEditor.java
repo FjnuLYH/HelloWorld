@@ -158,6 +158,8 @@ public class NoteEditor extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        System.out.println("启动  NoteEditor-onCreate！");
+
         /*
          * Creates an Intent to use when the Activity object's result is sent back to the
          * caller.
@@ -241,6 +243,11 @@ public class NoteEditor extends Activity {
             mState = STATE_EDIT;
         }
 
+
+
+
+
+
         // Sets the layout for this Activity. See res/layout/note_editor.xml
         setContentView(R.layout.note_editor);
 
@@ -276,6 +283,7 @@ public class NoteEditor extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        System.out.println("启动  NoteEditor-onResume！");
 
         /*
          * mCursor is initialized, since onCreate() always precedes onResume for any running
@@ -297,6 +305,9 @@ public class NoteEditor extends Activity {
                 // Set the title of the Activity to include the note title
                 int colTitleIndex = mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_TITLE);
                 String title = mCursor.getString(colTitleIndex);
+
+                System.out.println( "onResume  "+ title);
+
                 Resources res = getResources();
                 String text = String.format(res.getString(R.string.title_edit), title);
                 setTitle(text);
@@ -346,6 +357,7 @@ public class NoteEditor extends Activity {
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        System.out.println("启动  NoteEditor-onSaveInstanceState！");
         // Save away the original text, so we still have it if the activity
         // needs to be killed while paused.
         outState.putString(ORIGINAL_CONTENT, mOriginalContent);
@@ -370,7 +382,7 @@ public class NoteEditor extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-
+        System.out.println("启动  NoteEditor-onPause！");
         /*
          * Tests to see that the query operation didn't fail (see onCreate()). The Cursor object
          * will exist, even if no records were returned, unless the query failed because of some
@@ -401,7 +413,7 @@ public class NoteEditor extends Activity {
                  */
             } else if (mState == STATE_EDIT) {
                 // Creates a map to contain the new values for the columns
-                updateNote(text, null);
+                updateNote(text, null);//这里调用updateNote
             } else if (mState == STATE_INSERT) {
                 updateNote(text, text);
                 mState = STATE_EDIT;
@@ -426,11 +438,12 @@ public class NoteEditor extends Activity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        System.out.println("启动  NoteEditor-onCreateOptionsMenu！");
         // Inflate menu from XML resource
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.editor_options_menu, menu);
 
-        // Only add extra menu items for a saved note 
+        // Only add extra menu items for a saved note
         if (mState == STATE_EDIT) {
             // Append to the
             // menu items for any other activities that can do stuff with it
@@ -456,6 +469,7 @@ public class NoteEditor extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        System.out.println("启动  NoteEditor-onPrepareOptionsMenu！");
         // Check if note has changed and enable/disable the revert option
         int colNoteIndex = mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_NOTE);
         String savedNote = mCursor.getString(colNoteIndex);
@@ -481,6 +495,7 @@ public class NoteEditor extends Activity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        System.out.println("启动  NoteEditor-onOptionsItemSelected！");
         // Handle all of the possible menu actions.
         switch (item.getItemId()) {
         case R.id.menu_save:
@@ -511,7 +526,7 @@ public class NoteEditor extends Activity {
      * A helper method that replaces the note's data with the contents of the clipboard.
      */
     private final void performPaste() {
-
+        System.out.println("启动  NoteEditor-performPaste！");
         // Gets a handle to the Clipboard Manager
         ClipboardManager clipboard = (ClipboardManager)
                 getSystemService(Context.CLIPBOARD_SERVICE);
@@ -593,24 +608,29 @@ public class NoteEditor extends Activity {
     如果与你的意思完全不相配，就删除后自行输入标题好了。
      */
     private final void updateNote(String text, String title) {
-
+        System.out.println("启动  NoteEditor-updateNote！");
+//新建一个NOte，默认标题=内容第一行+日期
         // Sets up a map to contain values to be updated in the provider.
         ContentValues values = new ContentValues();
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, System.currentTimeMillis());
 
+        //获取当前时间
+        Long now = GetTime.Get_Now_Time_Long();
         // If the action is to insert a new note, this creates an initial title for it.
         if (mState == STATE_INSERT) {
 
             // If no title was provided as an argument, create one from the note text.
             if (title == null) {
-  
+
                 // Get the note's length
                 int length = text.length();
 
                 // Sets the title by getting a substring of the text that is 31 characters long
                 // or the number of characters in the note plus one, whichever is smaller.
-                title = text.substring(0, Math.min(30, length));
-  
+                //默认去第一排Note当title！！！
+                title = text.substring(0, Math.min(30, length)) + " " + now;
+                System.out.println(title);
+
                 // If the resulting length is more than 30 characters, chops off any
                 // trailing spaces
                 if (length > 30) {
@@ -626,6 +646,8 @@ public class NoteEditor extends Activity {
             // In the values map, sets the value of the title
             values.put(NotePad.Notes.COLUMN_NAME_TITLE, title);
         }
+
+
 
         // This puts the desired notes text into the map.
         values.put(NotePad.Notes.COLUMN_NAME_NOTE, text);
@@ -659,6 +681,7 @@ public class NoteEditor extends Activity {
      * 最后设置返回结果为“撤消”，退出本编辑活动。
      */
     private final void cancelNote() {
+        System.out.println("启动  NoteEditor-cancelNote！");
         if (mCursor != null) {
             if (mState == STATE_EDIT) {
                 // Put the original note text back into the database
@@ -681,6 +704,7 @@ public class NoteEditor extends Activity {
      * 删除便笺。如果光标非空就关闭mCursor并置为空，删除ContentResolver，清空编辑框中的文字。
      */
     private final void deleteNote() {
+        System.out.println("启动  NoteEditor-deleteNote！");
         if (mCursor != null) {
             mCursor.close();
             mCursor = null;

@@ -5,30 +5,30 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="4510716339264"
+    timestamp="7600707433029"
     token="1524453947561516795"
-    verifier="METHOD_DELETED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="1337" />
+        duration="204" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="288" />
+        duration="12" />
     <task
         name="verifier"
-        duration="46" />
+        duration="2" />
 
     <artifact
         location="D:\Android project\NotePad-master\app\build\outputs\apk\app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="4510716339264"
-        verifier="METHOD_DELETED" >
+        timestamp="7600707433029"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="D:\Android project\NotePad-master\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />

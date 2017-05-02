@@ -45,6 +45,13 @@ public final class NotePad {
      */
     public static final class Notes implements BaseColumns {
 
+
+        //======================================================
+        public static String Now_database_TITLE;
+        //======================================================
+
+
+
         // This class cannot be instantiated
         private Notes() {}
 

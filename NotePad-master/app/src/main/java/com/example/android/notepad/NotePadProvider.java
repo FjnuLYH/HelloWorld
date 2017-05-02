@@ -210,6 +210,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         */
        @Override//用于初次使用软件时生成数据库表
        public void onCreate(SQLiteDatabase db) {
+           System.out.println("启动  NotePadProvider-onCreate！");
            db.execSQL("CREATE TABLE " + NotePad.Notes.TABLE_NAME + " ("
                    + NotePad.Notes._ID + " INTEGER PRIMARY KEY,"//ID
                    + NotePad.Notes.COLUMN_NAME_TITLE + " TEXT,"//标题
@@ -231,7 +232,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         */
        @Override//在数据库的版本发生变化时会被调用，一般在软件升级时才需改变版本号
        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+           System.out.println("启动  NotePadProvider-onUpgrade！");
            // Logs that the database is being upgraded
            Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                    + newVersion + ", which will destroy all old data");
@@ -281,10 +282,16 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
    @Override//查询query()方法
    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
            String sortOrder) {
-
+       System.out.println("启动  NotePadProvider-query！");
        // Constructs a new query builder and sets its table name
        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
        qb.setTables(NotePad.Notes.TABLE_NAME);
+
+       //首先构造一个查询构建器projection，并设置数据表名。
+       // 然后通过sUriMatcher.match(uri)方法获得一个匹配者sUriMatcher对象，
+       // 以此对不同情况作出响应。
+
+
 
        /**
         * Choose the projection and adjust the "where" clause based on URI pattern-matching.
@@ -293,6 +300,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
            // If the incoming URI is for notes, chooses the Notes projection
            //选择note对象
            case NOTES:
+               //此种情况是无条件查询所有信息
                qb.setProjectionMap(sNotesProjectionMap);//Key值=所有列名  Value值=所有列名
                break;
 
@@ -301,7 +309,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
             * it selects that single note
             * 这是条件查询note
             */
-           case NOTE_ID:
+           case NOTE_ID://通过查询条件(ID)来查找该ID所有信息
                qb.setProjectionMap(sNotesProjectionMap);//Key值=所有列名  Value值=所有列名
                qb.appendWhere(
                    NotePad.Notes._ID +    // the name of the ID column
@@ -370,7 +378,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
     */
    @Override
    public String getType(Uri uri) {
-
+       System.out.println("启动  NotePadProvider-getType！");
        /**
         * Chooses the MIME type based on the incoming URI pattern
         */
@@ -460,7 +468,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
     @Override
     public AssetFileDescriptor openTypedAssetFile(Uri uri, String mimeTypeFilter, Bundle opts)
             throws FileNotFoundException {
-
+        System.out.println("启动  NotePadProvider-openTypedAssetFile！");
         // Checks to see if the MIME type filter matches a supported MIME type.
         String[] mimeTypes = getStreamTypes(uri, mimeTypeFilter);
 
@@ -514,9 +522,10 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
      * 如果pw非空就刷新（flush 就是实际物理写入）。
      * 结束前关闭输出流。
      */
-    @Override
+    @Override//这个应该是导出问价用到的函数？？
     public void writeDataToPipe(ParcelFileDescriptor output, Uri uri, String mimeType,
             Bundle opts, Cursor c) {
+        System.out.println("启动  NotePadProvider-writeDataToPipe！");
         // We currently only support conversion-to-text from a single note entry,
         // so no need for cursor data type checking here.
         FileOutputStream fout = new FileOutputStream(output.getFileDescriptor());
@@ -560,7 +569,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
      */
     @Override//等于新建一个Note！
     public Uri insert(Uri uri, ContentValues initialValues) {
-
+        System.out.println("启动  NotePadProvider-insert！");
         // Validates the incoming URI. Only the full provider URI is allowed for inserts.
         if (sUriMatcher.match(uri) != NOTES) {
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -600,6 +609,8 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, now);
         }//now没问题，但是values有问题!!!!!!!!!!!!!!!!
 
+
+
         // If the values map doesn't contain a title, sets the value to the default title.
         //如果不包含标题就加进“未命名”  Title就与当前日期组合 以实现Title日期
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_TITLE) == false) {
@@ -617,8 +628,10 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 
 
-        values = GetTime.Get_Title_Now(values);
-        System.out.println( "Insert数据库里的标题：" + values.get(NotePad.Notes.COLUMN_NAME_TITLE));
+        String Title = values.getAsString(NotePad.Notes.COLUMN_NAME_TITLE);
+        Title = Title + " " + now;
+        values.put(NotePad.Notes.COLUMN_NAME_TITLE,Title);
+
 
         // Performs the insert and returns the ID of the new note.
         long rowId = db.insert(
@@ -664,7 +677,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
      */
     @Override
     public int delete(Uri uri, String where, String[] whereArgs) {
-
+        System.out.println("启动  NotePadProvider-delete！");
         // Opens the database object in "write" mode.
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         String finalWhere;
@@ -750,23 +763,18 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
      */
     @Override
     public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
+        System.out.println("启动  NotePadProvider-update！");
 
         // Opens the database object in "write" mode.
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         int count;
         String finalWhere;
 
-        Long now = GetTime.Get_Now_Time_Long();  //  获取当前时间作为建立时间+更新时间
+        Long now = GetTime.Get_Now_Time_Long();
+        String Title = values.getAsString(NotePad.Notes.COLUMN_NAME_TITLE);
+        Title = Title + " " + now;
+        values.put(NotePad.Notes.COLUMN_NAME_TITLE,Title);
 
-        //如果vaules的键不包括创建时间和修改时间，就分别加入now；
-        if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
-            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, now);
-        }
-        System.out.println("更新 now" + now);
-        System.out.println("Values中的 now" + values.get(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE));
-
-        values = GetTime.Get_Title_Now(values);
-        System.out.println( "Update数据库里的标题：" + values.get(NotePad.Notes.COLUMN_NAME_TITLE));
 
         // Does the update based on the incoming URI pattern
         switch (sUriMatcher.match(uri)) {
@@ -777,10 +785,10 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
 
                 // Does the update and returns the number of rows updated.
                 count = db.update(
-                    NotePad.Notes.TABLE_NAME, // The database table name.
-                    values,                   // A map of column names and new values to use.
-                    where,                    // The where clause column names.
-                    whereArgs                 // The where clause column values to select on.
+                        NotePad.Notes.TABLE_NAME, // The database table name.
+                        values,                   // A map of column names and new values to use.
+                        where,                    // The where clause column names.
+                        whereArgs                 // The where clause column values to select on.
                 );
                 break;
 
@@ -796,9 +804,9 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
                  */
                 finalWhere =
                         NotePad.Notes._ID +                              // The ID column name
-                        " = " +                                          // test for equality
-                        uri.getPathSegments().                           // the incoming note ID
-                            get(NotePad.Notes.NOTE_ID_PATH_POSITION)
+                                " = " +                                          // test for equality
+                                uri.getPathSegments().                           // the incoming note ID
+                                        get(NotePad.Notes.NOTE_ID_PATH_POSITION)
                 ;
 
                 // If there were additional selection criteria, append them to the final WHERE
@@ -810,12 +818,12 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
 
                 // Does the update and returns the number of rows updated.
                 count = db.update(
-                    NotePad.Notes.TABLE_NAME, // The database table name.
-                    values,                   // A map of column names and new values to use.
-                    finalWhere,               // The final WHERE clause to use
-                                              // placeholders for whereArgs
-                    whereArgs                 // The where clause column values to select on, or
-                                              // null if the values are in the where argument.
+                        NotePad.Notes.TABLE_NAME, // The database table name.
+                        values,                   // A map of column names and new values to use.
+                        finalWhere,               // The final WHERE clause to use
+                        // placeholders for whereArgs
+                        whereArgs                 // The where clause column values to select on, or
+                        // null if the values are in the where argument.
                 );
                 break;
             // If the incoming pattern is invalid, throws an exception.
