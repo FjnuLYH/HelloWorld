@@ -5,33 +5,54 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="7600707433029"
+    timestamp="17680370410796"
     token="1524453947561516795"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="204" />
+        duration="7610" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="26092" />
     <task
         name="instant-run-transform"
-        duration="12" />
+        duration="572" />
     <task
         name="verifier"
-        duration="2" />
+        duration="80" />
 
     <artifact
-        location="D:\Android project\NotePad-master\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        location="D:\Android project\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
-        timestamp="7600707433029"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="17464356062965"
+        verifier="METHOD_ADDED" >
         <artifact
             location="D:\Android project\NotePad-master\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="17497304405778"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\Android project\NotePad-master\app\build\intermediates\builds\debug\17497304405778\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="17574962515718"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\Android project\NotePad-master\app\build\intermediates\builds\debug\17574962515718\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="17680370410796"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\Android project\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

@@ -156,9 +156,10 @@ public class TitleEditor extends Activity {
 
             // In the values map, sets the title to the current contents of the edit box.
 //这里是点击EditTitle时，将编辑后的标志，有本代码加上时间，记录数据库
+            Long now = GetTime.Get_Now_Time_Long();
 
             values.put(NotePad.Notes.COLUMN_NAME_TITLE,mText.getText().toString());
-
+            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,now);
 
 
             /*

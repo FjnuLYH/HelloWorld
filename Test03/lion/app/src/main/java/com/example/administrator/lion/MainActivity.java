@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+/*
     public void singleChoise(View source)
     {
         AlertDialog.Builder builder=new AlertDialog.Builder( this)//设置对话框图标
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .create()
                 .show();
-    }
+    }*/
 
 
     public void customView(        ){

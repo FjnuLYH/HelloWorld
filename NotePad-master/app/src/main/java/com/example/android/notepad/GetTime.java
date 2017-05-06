@@ -27,7 +27,7 @@ public class GetTime {
     static public Date Get_Now_Time_date()
     {
         Date dt = new Date();
-        DateFormat df = new SimpleDateFormat("yyyyMMdd");//设置显示格式df.format(dt)
+        DateFormat df = new SimpleDateFormat("yyyyMMdd HH:mm:ss");//设置显示格式df.format(dt)
         return dt;
     }
 

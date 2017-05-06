@@ -18,12 +18,16 @@ package com.example.android.notepad;
 
 import com.example.android.notepad.NotePad;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.ClipboardManager;
 import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -36,9 +40,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TableLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +63,11 @@ import java.util.Map;
  * {@link android.os.AsyncTask} object to perform operations asynchronously on a separate thread.
  */
 public class NotesList extends ListActivity {
+
+    public final static String CRAZYIT_ACTION="com.android.intent.action.SEARCH";
+    public final static String CRAZYIT_CATAGORY="android.intent.category.DEFAULT";
+
+
 
     // For logging and debugging
     //识别便笺的标签
@@ -82,13 +94,17 @@ public class NotesList extends ListActivity {
     private static final int COLUMN_INDEX_CREATE_MODIFICATION_DATE = 3;
 
 
-
+    public static  NotesList activity;
     /**
      * onCreate is called when Android starts this Activity from scratch.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        activity = this;
 
         // The user does not need to hold down the key to use menu shortcuts.
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
@@ -131,32 +147,6 @@ public class NotesList extends ListActivity {
         );
 
 
-//===============================================================
-// 读取cursor数据Title 和COLUMN_NAME_MODIFICATION_DATE   组合成新String[]
-        List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-        Map<String, Object> listem = new HashMap<String, Object>();
-        int i=0;
-        while(cursor.moveToNext())
-        {
-//根据列的索引直接读取  比如第0列的值
-//这里读取title和修改日期  拼在一起之后一起放入一个组件
-            String str=cursor.getString(COLUMN_INDEX_TITLE);//则是提取Title
-            str= str+ " " + cursor.getString(COLUMN_INDEX_CREATE_MODIFICATION_DATE) ;//这是提取修改时间
-            listem.put("strkey",str);
-            listems.add(listem);
-
-            System.out.println("ID："+ cursor.getString(0));
-            System.out.println("Title："+ cursor.getString(1));
-            System.out.println("创建时间："+ cursor.getString(2));
-            System.out.println("修改时间："+ cursor.getString(3));
-            System.out.println("Title+修改时间："+ str);
-
-
-        }
-
-
-
-
 
 
         /*
@@ -169,13 +159,14 @@ public class NotesList extends ListActivity {
 
         // The names of the cursor columns to display in the view, initialized to the title column
         //dataColumns=title--------数据库中的titile列名
-        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE } ;
+        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,
+        NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE} ;
         //新加  +NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE
         // 这里是列表title显示，如何结合COLUMN_NAME_TITLE与COLUMN_NAME_MODIFICATION_DATE
 
         // The view IDs that will display the cursor columns, initialized to the TextView in
         // noteslist_item.xml     R.id.TieleItem,R.id.DateItem
-        int[] viewIDs = { android.R.id.text1 };//显示的组件数量要等于dataColumns   一对一关系
+        int[] viewIDs = { android.R.id.text1 ,android.R.id.text2};//显示的组件数量要等于dataColumns   一对一关系
 
 
         // Creates the backing adapter for the ListView.  创建NOTE列表+初始化
@@ -188,15 +179,6 @@ public class NotesList extends ListActivity {
                       dataColumns,                      //显示的内容
                       viewIDs                           //显示用的视图
               );
-/*
-        //这里因为用SimpleAdapter初始化List
-        SimpleAdapter adapter=new SimpleAdapter(
-                this,
-                listems,
-                R.layout.noteslist_item ,
-                new String[] {"strkey"},
-                new int[]{android.R.id.text1}
-                );*/
 
 
 
@@ -217,8 +199,11 @@ public class NotesList extends ListActivity {
      * @param menu A Menu object, to which menu items should be added.
      * @return True, always. The menu should be displayed.
      */
-    @Override//创建选项菜单
+    @Override//创建选项菜单 右上角的Paste等菜单
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        System.out.println();
+
         // Inflate menu from XML resource
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_options_menu, menu);
@@ -238,6 +223,10 @@ public class NotesList extends ListActivity {
     @Override//准备选项菜单，为响应的操作检查和准备剪切板等
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+
+
+        System.out.println("启动 NotesList——onPrepareOptionsMenu");
+
 
         // The paste menu item is enabled if there is data on the clipboard.
         //定义一个剪切板clipboard，从系统服务中获取。
@@ -341,8 +330,14 @@ public class NotesList extends ListActivity {
     // 那就创建ACTION_PASTE活动为粘贴的意图去启动新活动。其他的就执行父类的菜单项的响应。
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        System.out.println("启动 NotesList——onOptionsItemSelected");
+
+
         switch (item.getItemId()) {
         case R.id.menu_add:
+            System.out.println("NotesList—上下文菜单点击选项—menu_add");
           /*
            * Launches a new Activity using an Intent. The intent filter for the Activity
            * has to have action ACTION_INSERT. No category is set, so DEFAULT is assumed.
@@ -351,6 +346,7 @@ public class NotesList extends ListActivity {
            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
            return true;
         case R.id.menu_paste:
+            System.out.println("NotesList—上下文菜单点击选项—menu_paste");
           /*
            * Launches a new Activity using an Intent. The intent filter for the Activity
            * has to have action ACTION_PASTE. No category is set, so DEFAULT is assumed.
@@ -358,8 +354,12 @@ public class NotesList extends ListActivity {
            */
           startActivity(new Intent(Intent.ACTION_PASTE, getIntent().getData()));
           return true;
-            case R.id.menu_Search:
-                startActivity( new Intent ( Intent.ACTION_SEARCH,getIntent().getData()));
+            case R.id.menu_Search://如果选择的是查找
+                //不要用Inten！拔了个弹出窗口弄过来！
+                System.out.println("NotesList—上下文菜单点击选项—menu_Search");
+
+                customView();
+                return true;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -381,6 +381,8 @@ public class NotesList extends ListActivity {
     //本方法创建上下文菜单。
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+
+        System.out.println("启动 NotesList——onCreateContextMenu");
 
         // The data from the menu item.
         AdapterView.AdapterContextMenuInfo info;
@@ -447,6 +449,8 @@ public class NotesList extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
         // The data from the menu item.
         AdapterView.AdapterContextMenuInfo info;
+
+        System.out.println("启动 NotesList——onContextItemSelected");
 
         /*
          * Gets the extra info from the menu item. When an note in the Notes list is long-pressed, a
@@ -531,6 +535,10 @@ public class NotesList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
+
+        System.out.println("启动 NotesList——onListItemClick");
+
+
         // Constructs a new URI from the incoming URI and the row ID
         //ContentUris类是程序用于使用“内容”处理Uri的一个对象，
         // 总是把Uri的scheme设置到ContentResolver.SCHEME_CONTENT (content://)。
@@ -556,4 +564,154 @@ public class NotesList extends ListActivity {
             startActivity(new Intent(Intent.ACTION_EDIT, uri));
         }
     }
+
+
+
+
+    //-----------------------------
+    public void customView( )
+    {
+        TableLayout search_view = (TableLayout)getLayoutInflater().inflate(
+                R.layout.search_by_title,null
+        );
+
+
+        //这里一定要用上面呐喊代码的 search_view.findViewById
+        // 不能用this.findViewById因为没有加载 search_by_title.xml 找不到R.id.SearchTitle，
+        //结果之后的mText回事NUll
+        //但是也不能用setContentView(R.layout.search_by_title) 还是会报错(xml)
+        mText = (EditText) search_view.findViewById(R.id.SearchTitle);
+
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("查询框标题")
+                .setView(search_view)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {//设置取消按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //创建一个·Toast信息
+                        Toast.makeText(NotesList.this,"你选择了确认查询！！",
+                                //设置显示的时间
+                                Toast.LENGTH_SHORT).show();
+                        Search();
+
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {//设置取消按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //创建一个·Toast信息
+                        Toast.makeText(NotesList.this,"你选择了取消查询！！",
+                                //设置显示的时间
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .create()
+                .show();
+
+
+
+    }
+
+//-----------------------
+
+//-----------------------------------
+
+    //准备读取数据载体
+    private Cursor mCursor;
+    // An EditText object for preserving the edited title.
+    private EditText mText;
+
+    // A URI object for the note whose title is being edited.
+    private Uri mUri;
+
+
+    protected void Search() {
+
+        mUri = NotePad.Notes.CONTENT_URI;//这里先试试notes的URI
+
+
+
+        // Verifies that the query made in onCreate() actually worked. If it worked, then the
+        // Cursor object is not null. If it is *empty*, then mCursor.getCount() == 0.
+
+
+        String Title="";//Title默认初始化
+        //这里是点击EditTitle时
+        //把输入框中需要查找的数据
+        if(  mText!=null )//以防万一可能的NULLPointException
+        if(mText.getText() != null)
+            Title = mText.getText().toString();//读取
+
+
+        if( mText==null )System.out.println("mText 是 null！！");
+
+
+        System.out.println("Title"+Title);
+
+
+
+
+
+        //查询条件语句
+        String selection =  NotePad.Notes.COLUMN_NAME_TITLE + " like ? ";
+        //查询条件语句的条件值
+        String[]   selectionArgs = {"%" + Title + "%"};
+        System.out.println("AA!!!==" + selectionArgs[0]);
+        System.out.println("MURI==" + mUri);
+
+        mCursor=getContentResolver().query(
+                mUri,    // The URI for the note to update.
+                PROJECTION,  // The values map containing the columns to update and the values to use.
+                selection,    // 查询条件 -where titile = ??
+                selectionArgs,     // 查询条件的值  ??的值
+                null       //排序
+        );//查询数据完成
+
+
+
+        if (mCursor != null) {//不为空才星星刷新
+
+System.out.println("刷新页面");
+            refresh();
+        }
+        else
+            System.out.println("刷新页面失败 mCursor==NULL");
+
+    }
+
+//--------------------------------------------------
+//刷新页面，加载查询结果
+    public void refresh() {
+        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,
+                NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE} ;
+        //新加  +NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE
+        // 这里是列表title显示，如何结合COLUMN_NAME_TITLE与COLUMN_NAME_MODIFICATION_DATE
+
+        // The view IDs that will display the cursor columns, initialized to the TextView in
+        // noteslist_item.xml     R.id.TieleItem,R.id.DateItem
+        int[] viewIDs = { android.R.id.text1 ,android.R.id.text2};//显示的组件数量要等于dataColumns   一对一关系
+
+
+        // Creates the backing adapter for the ListView.  创建NOTE列表+初始化
+
+        SimpleCursorAdapter adapter
+                = new SimpleCursorAdapter(
+                this,                             // The Context for the ListView
+                R.layout.noteslist_item,          //表明列表项的布局
+                mCursor,                           // 表示从查询得到的光标中的记录作为适配器的数据
+                dataColumns,                      //显示的内容
+                viewIDs                           //显示用的视图
+        );
+
+
+
+        // Sets the ListView's adapter to be the cursor adapter that was just created.
+        setListAdapter(adapter);
+    }
+
+
 }

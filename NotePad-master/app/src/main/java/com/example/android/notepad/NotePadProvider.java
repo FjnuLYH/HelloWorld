@@ -628,9 +628,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 
 
-        String Title = values.getAsString(NotePad.Notes.COLUMN_NAME_TITLE);
-        Title = Title + " " + now;
-        values.put(NotePad.Notes.COLUMN_NAME_TITLE,Title);
+
 
 
         // Performs the insert and returns the ID of the new note.
@@ -771,9 +769,8 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         String finalWhere;
 
         Long now = GetTime.Get_Now_Time_Long();
-        String Title = values.getAsString(NotePad.Notes.COLUMN_NAME_TITLE);
-        Title = Title + " " + now;
-        values.put(NotePad.Notes.COLUMN_NAME_TITLE,Title);
+
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,now);
 
 
         // Does the update based on the incoming URI pattern

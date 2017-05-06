@@ -92,7 +92,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.INSERT" />
                 <action android:name="android.intent.action.PASTE" />
-                <action android:name="android.intent.action.SEARCH" /> <!-- !!!!!!这里是查找菜单 -->
+
+                <!-- <action android:name="android.intent.action.SEARCH"/> -->
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="vnd.android.cursor.dir/vnd.google.note" />
@@ -132,24 +134,6 @@
                 -->
                 <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
                 <!-- This is the data type we operate on. -->
-                <data android:mimeType="vnd.android.cursor.item/vnd.google.note" />
-            </intent-filter>
-        </activity>
-
-        <!-- ===============================新加类======================== -->
-        <activity
-            android:name="com.example.android.notepad.Search_By_Title"
-            android:icon="@drawable/ic_menu_edit"
-            android:label="@string/search_by_title"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            android:windowSoftInputMode="stateVisible" >
-            <intent-filter>
-                <action android:name="com.android.notepad.action.SEARCH_BY_TITLE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-
                 <data android:mimeType="vnd.android.cursor.item/vnd.google.note" />
             </intent-filter>
         </activity>

@@ -20,8 +20,8 @@ public final class R {
         public static final int live_folder_notes=0x7f020006;
     }
     public static final class id {
-        public static final int SearchOk=0x7f060002;
-        public static final int SearchTitle=0x7f060001;
+        public static final int SearchTitle=0x7f060002;
+        public static final int Tablelayout=0x7f060001;
         public static final int context_copy=0x7f060009;
         public static final int context_delete=0x7f06000a;
         public static final int context_open=0x7f060008;

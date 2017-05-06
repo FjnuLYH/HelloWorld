@@ -17,12 +17,14 @@
 package com.example.android.notepad;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -37,6 +39,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.Toast;
 
 /**
  * This Activity handles "editing" a note, where editing is responding to
@@ -70,6 +74,7 @@ public class NoteEditor extends Activity {
     // as a "state" constant
     private static final int STATE_EDIT = 0;
     private static final int STATE_INSERT = 1;
+    private static final int STATE_SEARCH = 2;
 
     // Global mutable variables
     private int mState;
@@ -175,20 +180,24 @@ public class NoteEditor extends Activity {
 
         // For an edit action:
         if (Intent.ACTION_EDIT.equals(action)) {
+            System.out.println("路线001");
 
             // Sets the Activity state to EDIT, and gets the URI for the data to be edited.
             mState = STATE_EDIT;
             mUri = intent.getData();
+            System.out.println("从intent.getData()中得到的mUri=" + mUri);
 
             // For an insert or paste action:
         } else if (Intent.ACTION_INSERT.equals(action)
-                || Intent.ACTION_PASTE.equals(action)) {
+                || Intent.ACTION_PASTE.equals(action)
+                ) {
+            System.out.println("路线002");
 
             // Sets the Activity state to INSERT, gets the general note URI, and inserts an
             // empty record in the provider
             mState = STATE_INSERT;
             mUri = getContentResolver().insert(intent.getData(), null);
-
+            System.out.println("路线002——muri "+ mUri);
             /*
              * If the attempt to insert the new note fails, shuts down this Activity. The
              * originating Activity receives back RESULT_CANCELED if it requested a result.
@@ -209,14 +218,16 @@ public class NoteEditor extends Activity {
             setResult(RESULT_OK, (new Intent()).setAction(mUri.toString()));
 
         // If the action was other than EDIT or INSERT:
-        } else {
-
-            // Logs an error that the action was not understood, finishes the Activity, and
-            // returns RESULT_CANCELED to an originating Activity.
-            Log.e(TAG, "Unknown action, exiting");
-            finish();
-            return;
         }
+        else{
+
+                // Logs an error that the action was not understood, finishes the Activity, and
+                // returns RESULT_CANCELED to an originating Activity.
+                Log.e(TAG, "Unknown action, exiting");
+                finish();
+                return;
+            }
+
 
         /*
          * Using the URI passed in with the triggering Intent, gets the note or notes in
@@ -226,6 +237,7 @@ public class NoteEditor extends Activity {
          * the block will be momentary, but in a real app you should use
          * android.content.AsyncQueryHandler or android.os.AsyncTask.
          */
+        System.out.println("测试——managedQuery——muri "+ mUri);
         mCursor = managedQuery(
             mUri,         // The URI that gets multiple notes from the provider.
             PROJECTION,   // A projection that returns the note ID and note content for each note.
@@ -238,10 +250,14 @@ public class NoteEditor extends Activity {
         // (Must be done after mCursor is initialized.)
         if (Intent.ACTION_PASTE.equals(action)) {
             // Does the paste
+            System.out.println("NoteEditor--点击黏贴");
             performPaste();
             // Switches the state to EDIT so the title can be modified.
             mState = STATE_EDIT;
         }
+
+        //查询
+
 
 
 
@@ -314,6 +330,9 @@ public class NoteEditor extends Activity {
             // Sets the title to "create" for inserts
             } else if (mState == STATE_INSERT) {
                 setTitle(getText(R.string.title_create));
+            }else if (mState == STATE_SEARCH){
+
+                System.out.println("NoteEditor-onResume！ if (mState == STATE_SEARCH)");
             }
 
             /*
@@ -413,8 +432,10 @@ public class NoteEditor extends Activity {
                  */
             } else if (mState == STATE_EDIT) {
                 // Creates a map to contain the new values for the columns
-                updateNote(text, null);//这里调用updateNote
+                System.out.println("STATE_EDIT这里调用updateNote");
+                updateNote(text, null);//这里在Note编辑完后，点击右上角保存时调用updateNote
             } else if (mState == STATE_INSERT) {
+                System.out.println("STATE_INSERT这里调用updateNote");
                 updateNote(text, text);
                 mState = STATE_EDIT;
           }
@@ -445,6 +466,7 @@ public class NoteEditor extends Activity {
 
         // Only add extra menu items for a saved note
         if (mState == STATE_EDIT) {
+            System.out.println("!!!!!!!mState == STATE_EDIT");
             // Append to the
             // menu items for any other activities that can do stuff with it
             // as well.  This does a query on the system for any activities that
@@ -499,7 +521,9 @@ public class NoteEditor extends Activity {
         // Handle all of the possible menu actions.
         switch (item.getItemId()) {
         case R.id.menu_save:
+
             String text = mText.getText().toString();
+            System.out.println("menu_save这里调用updateNote");
             updateNote(text, null);
             finish();
             break;
@@ -583,6 +607,7 @@ public class NoteEditor extends Activity {
             }
 
             // Updates the current note with the retrieved title and text.
+            System.out.println("performPaste这里调用updateNote");
             updateNote(text, title);
         }
     }
@@ -612,33 +637,17 @@ public class NoteEditor extends Activity {
 //新建一个NOte，默认标题=内容第一行+日期
         // Sets up a map to contain values to be updated in the provider.
         ContentValues values = new ContentValues();
-        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, System.currentTimeMillis());
+        Long now = GetTime.Get_Now_Time_Long();
+
 
         //获取当前时间
-        Long now = GetTime.Get_Now_Time_Long();
+
         // If the action is to insert a new note, this creates an initial title for it.
         if (mState == STATE_INSERT) {
 
             // If no title was provided as an argument, create one from the note text.
             if (title == null) {
 
-                // Get the note's length
-                int length = text.length();
-
-                // Sets the title by getting a substring of the text that is 31 characters long
-                // or the number of characters in the note plus one, whichever is smaller.
-                //默认去第一排Note当title！！！
-                title = text.substring(0, Math.min(30, length)) + " " + now;
-                System.out.println(title);
-
-                // If the resulting length is more than 30 characters, chops off any
-                // trailing spaces
-                if (length > 30) {
-                    int lastSpace = title.lastIndexOf(' ');
-                    if (lastSpace > 0) {
-                        title = title.substring(0, lastSpace);
-                    }
-                }
             }
             // In the values map, sets the value of the title
             values.put(NotePad.Notes.COLUMN_NAME_TITLE, title);
@@ -651,7 +660,7 @@ public class NoteEditor extends Activity {
 
         // This puts the desired notes text into the map.
         values.put(NotePad.Notes.COLUMN_NAME_NOTE, text);
-
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,now);
         /*
          * Updates the provider with the new values in the map. The ListView is updated
          * automatically. The provider sets this up by setting the notification URI for
@@ -712,4 +721,9 @@ public class NoteEditor extends Activity {
             mText.setText("");
         }
     }
+
+
+
+
+
 }
