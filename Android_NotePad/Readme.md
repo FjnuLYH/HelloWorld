@@ -30,7 +30,10 @@ GetTime	获取当前时间
 功能扩展：
 1.添加时间戳：
 NotePadProvider修正：
+
+
 		insert()函数中，每次新插入数据时，通过调用GetTime.Get_Now_Time_Long()函数获取当前时间；然后再待插入的Values中将CREATE_DATE，MODIFICATION_DATE两列的数值替换成当前时间。
+
 		update()函数中，每次更新时，更新的Values中的MODIFICATION_DATE数据也会一并更新到当前时间。
 
 
@@ -42,6 +45,8 @@ NotePadProvider修正：
 
 2.依据条件查询标题的结果：
 NotesList改进：
+
+
 		修改方法：onOptionsItemSelected(MenuItem item)
 		onOptionsItemSelected()：方法中，新增加了menu_Search选项，并且调用customView()方法导入布局文件
 
