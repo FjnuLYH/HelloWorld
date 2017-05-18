@@ -5,92 +5,33 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="29507152986478"
+    timestamp="12526491571122"
     token="-3687947736297319884"
-    verifier="COMPATIBLE" >
+    verifier="R_CLASS_CHANGE" >
 
     <task
         name="javac"
-        duration="856" />
+        duration="979" />
     <task
         name="instant-run-dex"
-        duration="1109" />
+        duration="0" />
     <task
         name="instant-run-transform"
-        duration="61" />
+        duration="12" />
     <task
         name="verifier"
-        duration="10" />
+        duration="33" />
 
     <artifact
-        location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
-        type="RELOAD_DEX" />
+        location="D:\Android project\BookCode\NotePad-master\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
 
     <build
-        timestamp="26224218947421"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="12526491571122"
+        verifier="R_CLASS_CHANGE" >
         <artifact
             location="D:\Android project\BookCode\NotePad-master\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
-    </build>
-    <build
-        timestamp="26596312115531"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\26596312115531\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="28118225888330"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\28118225888330\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="28338250813840"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\28338250813840\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="29245536394699"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-            type="RESOURCES" />
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\29245536394699\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="29349572729378"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\29349572729378\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="29365903435066"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\29365903435066\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="29460900525990"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\builds\debug\29460900525990\classes.dex"
-            type="RELOAD_DEX" />
-    </build>
-    <build
-        timestamp="29507152986478"
-        verifier="COMPATIBLE" >
-        <artifact
-            location="D:\Android project\BookCode\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
-            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

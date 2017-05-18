@@ -14,5 +14,9 @@
     {
         "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\search_by_title.xml",
         "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\layout\\search_by_title.xml"
+    },
+    {
+        "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_background_colors.xml",
+        "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\layout\\select_background_colors.xml"
     }
 ]

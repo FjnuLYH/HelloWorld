@@ -8,12 +8,12 @@
         "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\drawable\\live_folder_notes.png"
     },
     {
-        "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_edit.png",
-        "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\drawable\\ic_menu_edit.png"
-    },
-    {
         "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_delete.png",
         "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\drawable\\ic_menu_delete.png"
+    },
+    {
+        "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_edit.png",
+        "source": "D:\\Android project\\BookCode\\NotePad-master\\app\\src\\main\\res\\drawable\\ic_menu_edit.png"
     },
     {
         "merged": "D:\\Android project\\BookCode\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_menu_save.png",

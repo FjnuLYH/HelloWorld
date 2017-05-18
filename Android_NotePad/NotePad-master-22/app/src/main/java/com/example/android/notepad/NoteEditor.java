@@ -17,13 +17,16 @@
 package com.example.android.notepad;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Canvas;
@@ -36,7 +39,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 /**
  * This Activity handles "editing" a note, where editing is responding to
@@ -52,6 +59,11 @@ import android.widget.EditText;
 public class NoteEditor extends Activity {
     // For logging and debugging purposes
     private static final String TAG = "NoteEditor";
+
+
+    static SharedPreferences preferences;
+    static SharedPreferences.Editor editor;
+    static int Them;
 
     /*
      * Creates a projection that returns the note ID and the note contents.
@@ -228,6 +240,11 @@ public class NoteEditor extends Activity {
         // Gets a handle to the EditText in the the layout.
         mText = (EditText) findViewById(R.id.note);
 
+
+        if(Them ==0 ) mText.setBackgroundColor( getResources().getColor(R.color.white) );;
+        if(Them ==1 ) mText.setBackgroundColor( getResources().getColor(R.color.aqua) );;
+        if(Them ==2 ) mText.setBackgroundColor( getResources().getColor(R.color.greenyellow) );;
+
         /*
          * If this Activity had stopped previously, its state was written the ORIGINAL_CONTENT
          * location in the saved Instance state. This gets the state.
@@ -390,7 +407,7 @@ public class NoteEditor extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.editor_options_menu, menu);
 
-        // Only add extra menu items for a saved note 
+        // Only add extra menu items for a saved note
         if (mState == STATE_EDIT) {
             // Append to the
             // menu items for any other activities that can do stuff with it
@@ -445,6 +462,9 @@ public class NoteEditor extends Activity {
         case R.id.menu_revert:
             cancelNote();
             break;
+            case R.id.select_color:
+                selectColors();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -533,7 +553,7 @@ public class NoteEditor extends Activity {
 
             // If no title was provided as an argument, create one from the note text.
             if (title == null) {
-  
+
                 // Get the note's length
                 int length = text.length();
 
@@ -541,7 +561,7 @@ public class NoteEditor extends Activity {
                 // or the number of characters in the note plus one, whichever is smaller.
                 //默认去第一排Note当title！！！
 
-  
+
                 // If the resulting length is more than 30 characters, chops off any
                 // trailing spaces
                 if (length > 30) {
@@ -616,4 +636,100 @@ public class NoteEditor extends Activity {
             mText.setText("");
         }
     }
+
+    //新增函数--弹出Dialog 选择并改变颜色
+    private final void selectColors()
+    {
+
+
+        preferences = getSharedPreferences("blackground",MODE_PRIVATE);
+        Them = preferences.getInt("Them",0);//config不存在时返回0
+
+        //editor = preferences.edit();
+
+
+
+        System.out.println("启动 选择颜色");
+
+        //setContentView(R.layout.note_editor);
+
+
+        RelativeLayout relative_view = (RelativeLayout)getLayoutInflater().inflate(
+                R.layout.select_background_colors,null
+        );
+
+
+        //这里如果没有setContentView(R.layout.select_background_colors);
+        //Button回事null；但是不能用setContentView
+        final Button But_white = (Button)relative_view.findViewById(R.id.color_white);
+        final Button But_blueviolet = (Button)relative_view.findViewById(R.id.color_aqua);
+        final Button But_greenyellow= (Button)relative_view.findViewById(R.id.color_greenyellow);
+
+
+
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("选择背景颜色")
+                .setView(relative_view)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {//设置取消按钮
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create()
+                .show();
+
+
+
+        But_white.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mText.setBackgroundColor( getResources().getColor(R.color.white) );//这里设置背景
+                Toast.makeText(NoteEditor.this,"你选择了白色！！",
+                        //设置显示的时间
+                        Toast.LENGTH_SHORT).show();
+
+                Them=0;
+
+            }
+        });
+
+        But_blueviolet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mText.setBackgroundColor( getResources().getColor(R.color.aqua) );//这里设置背景
+                Toast.makeText(NoteEditor.this,"你选择了浅蓝色！！",
+                        //设置显示的时间
+                        Toast.LENGTH_SHORT).show();
+
+                Them=1;
+
+            }
+        });
+
+        But_greenyellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mText.setBackgroundColor( getResources().getColor(R.color.greenyellow) );//这里设置背景
+                Toast.makeText(NoteEditor.this,"你选择了黄绿色！！",
+                        //设置显示的时间
+                        Toast.LENGTH_SHORT).show();
+
+                Them=2;
+
+            }
+        });
+
+
+
+
+    }
+
+
+
+
+
+
+
 }
