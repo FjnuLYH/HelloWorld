@@ -39,9 +39,21 @@ GetTime	获取当前时间
 	NotePadProvider文件修改进：
 	
 	
-			insert()函数中，每次新插入数据时，通过调用GetTime.Get_Now_Time_Long()函数获取当前时间；然后再待插入的Values中将CREATE_DATE，MODIFICATION_DATE两列的数值替换成当前时间。
+	insert()函数中，每次新插入数据时，通过调用GetTime.Get_Now_Time_Long()函数获取当前时间；然后再待插入的Values中将CREATE_DATE，MODIFICATION_DATE两列的数值替换成当前时间。主要修改代码如下：
+		// Gets the current system time in milliseconds
+		Long now = GetTime.Get_Now_Time_Long();
+		
+		// If the values map doesn't contain the creation date, sets the value to the current time.
+		if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
+		values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE, now);
+		}
+		
+		// If the values map doesn't contain the modification date, sets the value to the current time.
+		if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
+		values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, now);
+		}
 	
-			update()函数中，每次更新时，更新的Values中的MODIFICATION_DATE数据也会一并更新到当前时间。
+	update()函数中，每次更新时，更新的Values中的MODIFICATION_DATE数据也会一并更新到当前时间。
 
 
 
@@ -50,13 +62,13 @@ GetTime	获取当前时间
 	NotesList文件改进：
 	
 	
-			修改方法：onOptionsItemSelected(MenuItem item)
-			onOptionsItemSelected()：方法中，新增加了menu_Search选项，并且调用customView()方法导入布局文件
+	修改方法：onOptionsItemSelected(MenuItem item)
+	onOptionsItemSelected()：方法中，新增加了menu_Search选项，并且调用customView()方法导入布局文件
 	
 
-			新增方法：customView()：用于导入布局文件R.layout.search_by_title作为弹出对话框的样式；同时根据用户选择的取消/确认进行事件响应；如果选择确认，这使用Search()方法进行查询。
-			Search()：用于偶去用户输入的查询关键字并且进行数据库的查询，返回mCursor，如果返回值非空，再调用refresh()刷新，重新加载当前页面List项。
-			refresh()：根据查询的结果mCursor，重新加载当前页面List项。
+	新增方法：customView()：用于导入布局文件R.layout.search_by_title作为弹出对话框的样式；同时根据用户选择的取消/确认进行事件响应；如果选择确认，这使用Search()方法进行查询。
+	Search()：用于偶去用户输入的查询关键字并且进行数据库的查询，返回mCursor，如果返回值非空，再调用refresh()刷新，重新加载当前页面List项。
+	refresh()：根据查询的结果mCursor，重新加载当前页面List项。
 	
 	修改布局文件：list_options_menu.xml：新增了查询选项
 		
