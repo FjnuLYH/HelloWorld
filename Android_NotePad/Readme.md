@@ -463,13 +463,21 @@ NoteEditor文件：
 
 
 程序初始界面  即进入应用后的第一个界面
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/初始界面.PNG)
 
+
+
 为新建Note输入内容：
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/新建Note-1.PNG)
 
+
+
 新建Note完成
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/新建Note完成.PNG)
+
 
 
 运行过程示范
@@ -477,13 +485,22 @@ NoteEditor文件：
 标题编辑
 
 
+
+
 选中装备编辑的标题内容：
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/编辑标题.PNG)
 
+
+
 输入编辑的新标题
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/边疆标题-2.PNG)
 
+
+
 编辑标题完成后结果
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/编辑标题-完成.PNG)
 
 
@@ -491,26 +508,44 @@ NoteEditor文件：
 
 
 查询入口
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/查询入口.PNG)
 
+
+
 输入查询内容
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/输入查询内容.PNG)
 
+
+
 显示查询结果
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/显示查询结果.PNG)
 
 
 
 选择背景色
 
+
+
 进入Note
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/选择背景色1.PNG)
 
+
+
 点击选择颜色
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/选择背景色2.PNG)
 
+
+
 点击所属颜色。
+
 ![image](https://github.com/FjnuLYH/HelloWorld/blob/master/Android_NotePad/pict/选择背景色3.PNG)
+
+
 
 
 
